@@ -30,16 +30,16 @@ def detail_url(recipe_id):
 
 def create_recipe(user, **params):
     """Create and return a sample recipe"""
-    defualts = {
+    defaults = {
         'title': 'Sample recipe tittle',
         'time_minutes': 22,
         'price': Decimal('5.25'),
         'description': 'Sample description',
         'link': 'http://example.com/recipe.pdf'
     }
-    defualts.update(params)
+    defaults.update(params)
 
-    recipe = Recipe.objects.create(user=user, **defualts)
+    recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
 
 
@@ -354,7 +354,7 @@ class PrivateRecipeApiTest(TestCase):
         """Test create an ingrediento when updating"""
         recipe = create_recipe(user=self.user)
 
-        payload = {'Ingredients': [{'name': 'Limes'}]}
+        payload = {'ingredients': [{'name': 'Limes'}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
@@ -369,7 +369,7 @@ class PrivateRecipeApiTest(TestCase):
         recipe.ingredients.add(ingredient1)
 
         ingredient2 = Ingredient.objects.create(user=self.user, name='Chili')
-        payload = {'Ingredients': [{'name': 'Chili'}]}
+        payload = {'ingredients': [{'name': 'Chili'}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
@@ -383,7 +383,7 @@ class PrivateRecipeApiTest(TestCase):
         recipe = create_recipe(user=self.user)
         recipe.ingredients.add(ingredient)
 
-        payload = {'Ingredients': []}
+        payload = {'ingredients': []}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
