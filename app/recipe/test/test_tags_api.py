@@ -31,7 +31,6 @@ def create_user(email='user@example.com', password='testpass123'):
     return get_user_model().objects.create_user(email=email, password=password)
 
 
-
 class PublicTagsApiTests(TestCase):
     """Test unauthenticated API request"""
 
@@ -58,7 +57,7 @@ class PrivateTagsApiTest(TestCase):
         Tag.objects.create(user=self.user, name='Vegan')
         Tag.objects.create(user=self.user, name='Dessert')
 
-        res =self.client.get(TAGS_URL)
+        res = self.client.get(TAGS_URL)
 
         tags = Tag.objects.all().order_by('-name')
         serializer = TagSerializer(tags, many=True)
@@ -109,7 +108,7 @@ class PrivateTagsApiTest(TestCase):
         recipe = Recipe.objects.create(
             title='Green Eggs on Toast',
             time_minutes='10',
-            price= Decimal('2.50'),
+            price=Decimal('2.50'),
             user=self.user,
         )
         recipe.tags.add(tag1)

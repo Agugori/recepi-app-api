@@ -18,6 +18,7 @@ def recipe_image_file_path(instance, filename):
 
     return os.path.join('uploads', 'recipe', filename)
 
+
 class UserManager(BaseUserManager):
     """Manager for users"""
 
@@ -67,7 +68,7 @@ class Recipe(models.Model):
     link = models.CharField(max_length=255, blank=True)
     tags = models.ManyToManyField('Tag')
     ingredients = models.ManyToManyField('Ingredient')
-    image = models.ImageField(null=True, upload_to=recipe_image_file_path )
+    image = models.ImageField(null=True, upload_to=recipe_image_file_path)
 
     def __str__(self):
         return self.title
@@ -76,7 +77,8 @@ class Recipe(models.Model):
 class Tag(models.Model):
     """Tag for filtering recipes"""
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -85,7 +87,8 @@ class Tag(models.Model):
 class Ingredient(models.Model):
     """Ingredient for recipe"""
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

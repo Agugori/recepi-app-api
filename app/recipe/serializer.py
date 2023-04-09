@@ -8,6 +8,7 @@ from core.models import (
     Ingredient,
 )
 
+
 class IngredientSerializer(serializers.ModelSerializer):
     """Serializer for ingredientes"""
 
@@ -34,7 +35,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields =[
+        fields = [
             'id', 'title', 'time_minutes', 'price', 'link', 'tags',
             'ingredients',
         ]
@@ -88,7 +89,6 @@ class RecipeSerializer(serializers.ModelSerializer):
         return instance
 
 
-
 class RecipeDetailSerializer(RecipeSerializer):
     """Serializer for recipe detail view"""
 
@@ -104,4 +104,3 @@ class RecipeImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image']
         read_only_fields = ['id']
         extra_kwargs = {'image': {'required': 'True'}}
-

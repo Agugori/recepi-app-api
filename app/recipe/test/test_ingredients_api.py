@@ -20,6 +20,7 @@ from recipe.serializer import IngredientSerializer
 
 INGREDIENTS_URL = reverse('recipe:ingredient-list')
 
+
 def detail_url(ingredient_id):
     """Create and return an ingredient detail URL"""
     return reverse('recipe:ingredient-detail', args=[ingredient_id])
@@ -43,7 +44,7 @@ class PublicIngredientApiTest(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-class  PrivateIngredientApiTest(TestCase):
+class PrivateIngredientApiTest(TestCase):
     """Test authenticated api request"""
 
     def setUp(self):
@@ -107,8 +108,8 @@ class  PrivateIngredientApiTest(TestCase):
         in2 = Ingredient.objects.create(user=self.user, name='Turkey')
         recipe = Recipe.objects.create(
             title='Apple Crumble',
-            time_minutes= 5,
-            price= Decimal('4.50'),
+            time_minutes=5,
+            price=Decimal('4.50'),
             user=self.user
         )
         recipe.ingredients.add(in1)
@@ -126,14 +127,14 @@ class  PrivateIngredientApiTest(TestCase):
         Ingredient.objects.create(user=self.user, name='Lentils')
         recipe1 = Recipe.objects.create(
             title='Eggs Benedicts',
-            time_minutes= 16,
-            price= Decimal('7.00'),
+            time_minutes=16,
+            price=Decimal('7.00'),
             user=self.user
         )
         recipe2 = Recipe.objects.create(
             title='Herb Eggs',
-            time_minutes= 20,
-            price= Decimal('4.00'),
+            time_minutes=20,
+            price=Decimal('4.00'),
             user=self.user
         )
         recipe1.ingredients.add(ing)
